@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class VinnieThePooh {
     private static int[][] forest;
-    private static final int forestSize = 5000;
+    private static final int forestSize = 50;
 
     private static final int hiveSize = 5;
     private static boolean PoohFound = false;
@@ -48,7 +48,7 @@ public class VinnieThePooh {
 
     private static void _checkRow(int row, int hiveNum) {
         synchronized (VinnieThePooh.class) {
-            lastSearchedRow++;
+            lastSearchedRow = lastSearchedRow + 1;
         }
 
         for (int col = 0; col < forestSize - 1; col++) {
