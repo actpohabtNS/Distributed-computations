@@ -186,6 +186,7 @@ public class Lab01 {
                     }
                 });
         th1.setPriority(th1P);
+        th1.setDaemon(true);
         th1.start();
     }
 
@@ -210,6 +211,7 @@ public class Lab01 {
                     }
                 });
         th2.setPriority(th2P);
+        th1.setDaemon(true);
         th2.start();
     }
 
