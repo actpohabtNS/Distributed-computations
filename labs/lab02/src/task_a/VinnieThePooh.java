@@ -1,27 +1,33 @@
 package task_a;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Arrays;
 
 public class VinnieThePooh {
-    private static int[][] forest;
-    private static final int forestSize = 50;
+    private static boolean[][] forest;
+    private static final int forestSize = 5000;
 
     private static final int hiveSize = 5;
-    private static boolean PoohFound = false;
+    private volatile static boolean PoohFound = false;
     private static int lastSearchedRow = 0;
+
+    private static Instant start;
+    private static Instant end;
 
     public static void main(String[] args) {
         initForest(forestSize);
+        start = Instant.now();
         hidePooh();
         startPursue();
     }
 
     public static void initForest(int size) {
-        forest = new int[size][size];
+        forest = new boolean[size][size];
 
         for (int i = 0; i < size; i++) {
-            int[] row = new int[size];
-            Arrays.fill(row, 0);
+            boolean[] row = new boolean[size];
+            Arrays.fill(row, false);
             forest[i] = row;
         }
     }
@@ -30,7 +36,7 @@ public class VinnieThePooh {
         int row = _getRandomInt(0, forestSize - 1);
         int col = _getRandomInt(0, forestSize - 1);
 
-        forest[row][col] = 1;
+        forest[row][col] = true;
     }
 
     public static void startPursue() {
@@ -52,9 +58,11 @@ public class VinnieThePooh {
         }
 
         for (int col = 0; col < forestSize - 1; col++) {
-            if (forest[row][col] == 1) {
+            if (forest[row][col]) {
                 PoohFound = true;
-                System.out.printf("Pooh has been found at %d row, %d col (by hive %d) \n", row, col, hiveNum);
+                end = Instant.now();
+                System.out.printf("Pooh has been found at %,d row, %,d col (by hive %,d) \n", row, col, hiveNum);
+                System.out.printf("Time elapsed: %,d micros", Duration.between(start, end).toNanos() / 1000);
                 return;
             }
         }
