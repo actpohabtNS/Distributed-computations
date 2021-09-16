@@ -9,6 +9,10 @@ public class Property {
         value = _getRandomInt(min, max);
     }
 
+    public Property(int value) {
+        this.value = value;
+    }
+
     private static int _getRandomInt(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
     }
