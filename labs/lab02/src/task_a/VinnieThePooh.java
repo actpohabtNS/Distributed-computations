@@ -5,11 +5,11 @@ import java.time.Instant;
 import java.util.Arrays;
 
 public class VinnieThePooh {
-    private static boolean[][] forest;
-    private static final int forestSize = 5000;
+    public static boolean[][] forest;
+    public static final int forestSize = 5000;
 
     private static final int hiveSize = 5;
-    private volatile static boolean PoohFound = false;
+    public volatile static boolean PoohFound = false;
     private static int lastSearchedRow = 0;
 
     private static Instant start;
@@ -41,31 +41,17 @@ public class VinnieThePooh {
 
     public static void startPursue() {
         for (int i = 0; i < hiveSize - 1 || PoohFound; i++) {
-            int finalI = i;
-            Thread th = new Thread(() -> {
-               while (!PoohFound) {
-                   _checkRow(lastSearchedRow, finalI);
-               }
-            });
-
-            th.start();
+            new Bee(i);
         }
     }
 
-    private static void _checkRow(int row, int hiveNum) {
-        synchronized (VinnieThePooh.class) {
-            lastSearchedRow = lastSearchedRow + 1;
-        }
+    public static synchronized int getForestLine() {
+        return lastSearchedRow++;
+    }
 
-        for (int col = 0; col < forestSize - 1; col++) {
-            if (forest[row][col]) {
-                PoohFound = true;
-                end = Instant.now();
-                System.out.printf("Pooh has been found at %,d row, %,d col (by hive %,d) \n", row, col, hiveNum);
-                System.out.printf("Time elapsed: %,d micros", Duration.between(start, end).toNanos() / 1000);
-                return;
-            }
-        }
+    public static void executePooh() {
+        end = Instant.now();
+        System.out.printf("Time elapsed %,d micros", Duration.between(start, end).getNano() / 1000);
     }
 
     private static int _getRandomInt(int min, int max) {
