@@ -4,46 +4,56 @@ import (
 	"fmt"
 )
 
-//TODO: smokers should decrement ss values, should use semaphores
+func (t *table) SmokerWithTobacco(smokers chan int) {
+	for {
+		select {
+		case <-smokers:
+			if t.paper == 0 || t.matches == 0 {
+				fmt.Println("[Smoker with Tobacco]: nothing to smoke")
+				continue
+			}
 
-func (t *table) SmokerWithTobacco() {
-	if t.tobacco != 0 ||
-		t.paper == 0 ||
-		t.matches == 0 {
-		fmt.Println("[Smoker with Tobacco]: Why am I receiving a wrong Smoking Set???")
+			t.mu.Lock()
+			t.paper--
+			t.matches--
+			t.mu.Unlock()
+			fmt.Println("[Smoker with Tobacco]: smoking (̅_̅_̅_̅(̅_̅_̅_̅_̅_̅_̅_̅_̅̅_̅()ڪے")
+		}
 	}
-
-	t.mu.Lock()
-	t.paper--
-	t.matches--
-	t.mu.Unlock()
-	fmt.Println("[Smoker with Tobacco]: smoking...")
 }
 
-func (t *table) SmokerWithPaper() {
-	if t.tobacco != 1 ||
-		t.paper != 0 ||
-		t.matches != 1 {
-		fmt.Println("[Smoker with Paper]: Why am I receiving a wrong Smoking Set???")
-	}
+func (t *table) SmokerWithPaper(smokers chan int) {
+	for {
+		select {
+		case <-smokers:
+			if t.tobacco == 0 || t.matches == 0 {
+				fmt.Println("[Smoker with Paper]: nothing to smoke")
+				continue
+			}
 
-	t.mu.Lock()
-	t.tobacco--
-	t.matches--
-	t.mu.Unlock()
-	fmt.Println("[Smoker with Paper]: smoking...")
+			t.mu.Lock()
+			t.tobacco--
+			t.matches--
+			t.mu.Unlock()
+			fmt.Println("[Smoker with Paper]: smoking (̅_̅_̅_̅(̅_̅_̅_̅_̅_̅_̅_̅_̅̅_̅()ڪے")
+		}
+	}
 }
 
-func (t *table) SmokerWithMatches() {
-	if t.tobacco != 1 ||
-		t.paper != 1 ||
-		t.matches != 0 {
-		fmt.Println("[Smoker with Matches]: Why am I receiving a wrong Smoking Set???")
-	}
+func (t *table) SmokerWithMatches(smokers chan int) {
+	for {
+		select {
+		case <-smokers:
+			if t.tobacco == 0 || t.paper == 0 {
+				fmt.Println("[Smoker with Matches]: nothing to smoke")
+				continue
+			}
 
-	t.mu.Lock()
-	t.tobacco--
-	t.paper--
-	t.mu.Unlock()
-	fmt.Println("[Smoker with Matches]: smoking...")
+			t.mu.Lock()
+			t.tobacco--
+			t.paper--
+			t.mu.Unlock()
+			fmt.Println("[Smoker with Matches]: smoking (̅_̅_̅_̅(̅_̅_̅_̅_̅_̅_̅_̅_̅̅_̅()ڪے")
+		}
+	}
 }
