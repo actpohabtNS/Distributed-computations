@@ -24,7 +24,7 @@ public class Database {
                     reader.search(Instructions.FIND_NAME_BY_NUMBER, "26352673"));
             System.out.println("Number of " + name + ": " +
                     reader.search(Instructions.FIND_NUMBER_BY_NAME, name));
-            System.out.println("Status of removing operation: " +
+            System.out.println("Status of removing " + name + ": " +
                     writer.changeFile(Instructions.REMOVE, name,
                             number));
             System.out.println("Name of " + number + ": " +
