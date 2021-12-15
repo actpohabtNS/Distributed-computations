@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE Library SYSTEM "library.dtd">
+<Library>
+    <Author id="author0" name="William Blake">
+        <Book authorId="author0" id="id0" name="London" releaseYear="1794"/>
+        <Book authorId="author0" id="id1" name="The Tyger" releaseYear="1794"/>
+    </Author>
+    <Author id="author1" name="Charles Dickens">
+        <Book authorId="author1" id="id2" name="Hey" releaseYear="1789"/>
+    </Author>
+    <Author id="author2" name="George Orwell">
+        <Book authorId="author2" id="id3" name="1984" releaseYear="1949"/>
+    </Author>
+    <Author id="author3" name="Stephen King">
+        <Book authorId="author3" id="id4" name="The Running Man" releaseYear="1982"/>
+        <Book authorId="author3" id="id5" name="11/22/63" releaseYear="2011"/>
+    </Author>
+</Library>
