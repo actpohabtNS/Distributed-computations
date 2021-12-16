@@ -3,7 +3,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-public class ClientRMITask12 {
+public class ClientRMITask11 {
     public static void main(String[] args)
             throws NotBoundException, RemoteException,
             MalformedURLException {

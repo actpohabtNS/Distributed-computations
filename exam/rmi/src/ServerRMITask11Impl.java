@@ -3,12 +3,12 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ServerRMITask12Impl extends UnicastRemoteObject
+public class ServerRMITask11Impl extends UnicastRemoteObject
         implements BusPark {
 
     private final ArrayList<Bus> busses;
 
-    public ServerRMITask12Impl() throws RemoteException {
+    public ServerRMITask11Impl() throws RemoteException {
         this.busses = new ArrayList<>(Arrays.asList(
                 new Bus("Nikita", "Toyota", 13, 10, 300000),
                 new Bus("Vasya", "Porshe", 11, 2, 20000),
